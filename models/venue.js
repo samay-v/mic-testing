@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const venueSchema = new mongoose.Schema({
     name : String,
     address : String,
+    city : String,
     image : String,
     description: String,
     contact : String,
