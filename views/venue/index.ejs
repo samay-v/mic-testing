@@ -1,0 +1,12 @@
+<% include ../partials/header.ejs %>
+
+<% venue.forEach((venue)=>{%>
+    <li><%=venue.name%></li>
+    <li><%=venue.address%></li>
+    <li><img src="<%=venue.image%>" alt=""></li>
+    <li><%=venue.description%></li>
+    <li><%=venue.contact%></li>
+    <li><%=venue.rating%></li>
+    <li><%=venue.days%></li>
+<%})%>
+<% include ../partials/footer %>
