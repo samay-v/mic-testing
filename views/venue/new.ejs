@@ -1,0 +1,15 @@
+<% include ../partials/header.ejs %>
+<h1>Add a new Venue</h1>
+
+<form action="/venues" method="post">
+    <input type="text" name="venue[name]" placeholder="Name of the venue" required>
+    <input type="text" name="venue[address]" placeholder="Address of the venue" required>
+    <input type="text" name="venue[city]" placeholder="City" required>
+    <input type="text" name="venue[image]" placeholder="Image URL" required>
+    <textarea name="venue[description]" required></textarea>
+    <input type="text" name="venue[contact]" placeholder="Contact" required>
+    <input type="text" name="venue[days]" placeholder="days" required>
+    <input type="submit">
+</form>
+
+<% include ../partials/footer.ejs %>
