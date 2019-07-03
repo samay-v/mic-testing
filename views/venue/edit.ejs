@@ -1,0 +1,16 @@
+<% include ../partials/header.ejs %>
+
+<h1>Edit <%=venue.name%>"</h1>
+
+<form action="/venues/<%= venue._id %>?_method=PUT" method="post">
+    <input type="text" name="venue[name]" value="<%=venue.name%>" required>
+    <input type="text" name="venue[address]" value="<%=venue.address%>" required>
+    <input type="text" name="venue[city]" value="<%=venue.city%>" required>
+    <input type="text" name="venue[image]" value="<%=venue.image%>" required>
+    <textarea name="venue[description]"  required><%=venue.description%></textarea>
+    <input type="text" name="venue[contact]" value="<%=venue.contact%>" required>
+    <input type="text" name="venue[days]" value="<%=venue.days%>" required>
+    <input type="submit">
+</form>
+
+<% include ../partials/footer.ejs %>
