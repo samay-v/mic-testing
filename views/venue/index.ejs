@@ -1,13 +1,33 @@
 <% include ../partials/header.ejs %>
+<div class="ui container main">
+    <h1 class="ui header">All Venues</h1>
+    <div class="ui container">
+        <div class="ui three stackable cards">
+            <% venue.forEach((venue)=>{%>
+            <div class="ui link card">
+                <div class="image">
+                    <img src="<%=venue.image%>">
+                </div>
+                <div class="content">
+                    <div class="header"><%=venue.name%></div>
+                    <div class="meta">
+                        <span class="right floated">
+                            <%=venue.city%>
+                        </span>
+                        <span><%=venue.rating%></span>
+                    </div>
+                    <div class="description">
+                        <%=venue.description%>
+                    </div>
+                </div>
+                <div class="ui bottom attached button">
+                    <i class="add icon"></i>
+                    <a href="./venues/<%=venue._id%>">Read More</a>
+                </div>
+            </div>
+            <%})%>
+        </div>
+    </div>
+</div>
 
-<% venue.forEach((venue)=>{%>
-    <li><%=venue.name%></li>
-    <li><%=venue.address%></li>
-    <li><img src="<%=venue.image%>" alt=""></li>
-    <li><%=venue.description%></li>
-    <li><%=venue.contact%></li>
-    <li><%=venue.rating%></li>
-    <li><%=venue.days%></li>
-    <li><%=venue._id%></li>
-<%})%>
 <% include ../partials/footer %>
