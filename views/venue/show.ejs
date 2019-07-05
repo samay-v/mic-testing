@@ -1,13 +1,85 @@
 <% include ../partials/header.ejs %>
+<div class="ui container semi">
+    <div class="ui three column stackable grid container">
+        <div class="sixteen wide column">
+            <h1 class="ui block header"> <%=venue.name%> </h1>
+        </div>
+        <div class="ten wide column">
+            <img class="ui fluid image" src="<%=venue.image%>">
+        </div>
+        <div class="six wide column">
+            <P><%=venue.description%></P>
 
-<h1><%=venue.name%></h1>
-<br>
-<li><%=venue.address%></li>
-<li><%=venue.image%></li>
-<li><%=venue.description%></li>
-<li><%=venue.contact%></li>
-<li><%=venue.rating%></li>
-<li><%=venue.days%></li>
-<li><%=venue._id%></li>
 
+            <div class="ui list">
+                <div class="item">
+                    <i class="address card icon"></i>
+                    <div class="content">
+                        <%=venue.address%>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="phone icon"></i>
+                    <div class="content">
+                        <%=venue.contact%>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="star outline icon"></i>
+                    <div class="content">
+                        <%=venue.rating%>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="calendar alternate icon"></i>
+                    <div class="content">
+                        <%=venue.days%>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <a class="ui orrange basic button" href="/venues/<%=venue._id%>/edit">Edit</a>
+                </div>
+                <div>
+                    <form action="/venues/<%=venue._id%>?_method=DELETE" method="post" class="inline fields">
+                        <button class="ui negative basic button">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="ten wide column">
+            <div class="ui comments">
+                <h3 class="ui dividing header">Reviews</h3>
+                <%venue.reviews.forEach((review)=>{%>
+                <div class="comment">
+                    <div class="content">
+                        <a class="author">USER NAME</a>
+                        <div class="metadata">
+                            <span class="date"><%=review.created.toDateString()%></span>
+                            <div class="ui star rating" data-rating="<%=review.rating%>" data-max-rating="5"></div>
+                        </div>
+                        <div class="text">
+                            <%=review.text%>
+                        </div>
+                    </div>
+                </div>
+                <%});%>
+
+                <form class="ui reply form segment" action="/venues/<%=venue._id%>/review" method="POST">
+                    <div class="field">
+                        <textarea name="review[text]"></textarea>
+                    </div>
+                    <div class="ui star rating" id="newRating" data-max-rating="5"></div>
+                    <input type="hidden" name="review[rating]" id="ratingInput" value="">
+                    <button class="ui blue labeled submit icon button">
+                        <i class="icon edit"></i> Add Reply
+                    </button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
 <% include ../partials/footer.ejs %>
