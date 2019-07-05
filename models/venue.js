@@ -7,6 +7,13 @@ const venueSchema = new mongoose.Schema({
     image: String,
     description: String,
     contact: String,
+    author :{
+        id:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+    },
     reviews: [
         {
             type: mongoose.Schema.Types.ObjectId,
