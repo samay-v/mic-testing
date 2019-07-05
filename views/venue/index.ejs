@@ -14,7 +14,7 @@
                         <span class="right floated">
                             <%=venue.city%>
                         </span>
-                        <span><%=venue.rating%></span>
+                        <div class="ui star rating" data-rating="<%=venue.rating%>" data-max-rating="5"></div>
                     </div>
                     <div class="description">
                         <%=venue.description%>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="ui bottom attached button">
                     <i class="add icon"></i>
-                    <a href="./venues/<%=venue._id%>">Read More</a>
+                    <a href="/venues/<%=venue._id%>">Read More</a>
                 </div>
             </div>
             <%})%>
