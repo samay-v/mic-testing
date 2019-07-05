@@ -1,7 +1,8 @@
 // dependencies
 const express = require("express"),
     router = express.Router(),
-    Venue = require("../models/venue");
+    Venue = require("../models/venue"),
+    middleware = require("../middleware/index.js");
 
 //index route
 router.get("/venues", (req, res)=>{
@@ -9,22 +10,24 @@ router.get("/venues", (req, res)=>{
         if(err){
             console.log(err);
         }else{
-            res.render("venue/index.ejs",{venue: allVenues});
+            res.render("venue/index.ejs",{venue: allVenues, currentUser: req.user});
         }
     })
 })
 
 //form to add a new venue
-router.get("/venues/new", (req, res)=>{
-    res.render("venue/new");
+router.get("/venues/new",middleware.isLoggedIn, (req, res)=>{
+    res.render("venue/new",{curUser:req.currentUser});
 });
 
 //Create new venue
-router.post("/venues",(req, res)=>{
+router.post("/venues",middleware.isLoggedIn,(req, res)=>{
     Venue.create(req.body.venue, (err, newVenue)=>{
         if(err){
             console.log(err);
         }else{
+            newVenue.author= { id: req.user._id, username: req.user.username };
+            newVenue.save();
             res.redirect("/venues/"+newVenue._id);
         }
     });
@@ -42,7 +45,7 @@ router.get("/venues/:id",(req, res)=>{
 });
 
 // form to edit a venue 
-router.get("/venues/:id/edit", (req, res)=>{
+router.get("/venues/:id/edit",middleware.checkVenueOwnership, (req, res)=>{
     Venue.findById(req.params.id,(err, foundVenue)=>{
         if(err){
             console.log(err);
@@ -53,7 +56,7 @@ router.get("/venues/:id/edit", (req, res)=>{
 });
 
 //Update route
-router.put("/venues/:id", (req, res)=>{
+router.put("/venues/:id",middleware.checkVenueOwnership, (req, res)=>{
     Venue.findByIdAndUpdate(req.params.id, req.body.venue, (err, updatedVenue)=>{
         if(err){
             console.log(err);
@@ -64,7 +67,7 @@ router.put("/venues/:id", (req, res)=>{
 });
 
 //Destroy route
-router.delete("/venues/:id",(req, res)=>{
+router.delete("/venues/:id",middleware.checkVenueOwnership, (req, res)=>{
     Venue.findByIdAndRemove(req.params.id, (err)=>{
         if(err){
             console.log(err);
