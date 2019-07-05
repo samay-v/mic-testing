@@ -1,0 +1,35 @@
+<% include ./partials/header %>
+<div class="container main">
+    <div class="ui middle aligned center aligned grid">
+        <div class="six wide column">
+            <h2 class="ui violet image header">
+                <div class="content">
+                    Sign up and make a new account
+                </div>
+            </h2>
+            <form class="ui large form" action="/register" method="post">
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="username" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <button class="ui fluid large violet submit button">Sign up</button>
+                </div>
+
+                <div class="ui error message"></div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<% include ./partials/footer %>
