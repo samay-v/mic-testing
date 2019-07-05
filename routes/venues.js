@@ -32,7 +32,7 @@ router.post("/venues",(req, res)=>{
 
 // show individual venue
 router.get("/venues/:id",(req, res)=>{
-    Venue.findById(req.params.id,(err, foundVenue)=>{
+    Venue.findById(req.params.id).populate("reviews").exec((err, foundVenue)=>{
         if(err){
             console.log(err);
         }else{
@@ -68,6 +68,8 @@ router.delete("/venues/:id",(req, res)=>{
     Venue.findByIdAndRemove(req.params.id, (err)=>{
         if(err){
             console.log(err);
+        }else{
+            res.redirect("/venues");
         }
     });
 });
