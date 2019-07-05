@@ -7,6 +7,10 @@ const express = require("express"),
     Venue = require("./models/venue"),
     Review = require("./models/review"),
     seed = require("./seed"),
+    passport = require("passport"),
+    localStratergy = require("passport-local"),
+    User = require("./models/user.js"),
+    secret = require("./secret"),
     indexRoutes = require("./routes/index.js"),
     reviewRoutes = require("./routes/reviews.js"),
     venueRoutes = require("./routes/venues");
@@ -21,6 +25,23 @@ app.use(methodOverride("_method"));
 mongoose.connect("mongodb://localhost:27017/mic_testing", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 // seed();
+
+//configure passport
+app.use(require("express-session")({
+    secret: secret,
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStratergy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    next();
+ });
 
 //routes
 app.use(indexRoutes);
