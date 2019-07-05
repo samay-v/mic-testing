@@ -5,8 +5,10 @@ const express = require("express"),
     mongoose = require("mongoose"),
     methodOverride = require("method-override"),
     Venue = require("./models/venue"),
+    Review = require("./models/review"),
     seed = require("./seed"),
     indexRoutes = require("./routes/index.js"),
+    reviewRoutes = require("./routes/reviews.js"),
     venueRoutes = require("./routes/venues");
 
 //configure express
@@ -23,6 +25,7 @@ mongoose.set('useFindAndModify', false);
 //routes
 app.use(indexRoutes);
 app.use(venueRoutes);
+app.use(reviewRoutes);
 
 //start server
 const port = 3000;
