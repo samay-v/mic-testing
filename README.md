@@ -12,7 +12,7 @@ A CRUD full stack app to find your local open mic venues and rate them.
 ## To run locally
 ### Prerequisites
  - git
- - non
+ - npm
 ### Steps
  - run `git clone https://github.com/samay-v/mic-testing.git`
  - install dependencies using `npm install` inside the directory
