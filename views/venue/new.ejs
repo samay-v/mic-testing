@@ -2,40 +2,63 @@
 <div class="ui container main segment">
     <h1>Add a new Venue</h1>
     <form class="ui form" action="/venues" method="post">
-        <div class="two fields">
+        <div class="three fields">
+
             <div class="field">
                 <label>Venue Name</label>
                 <input type="text" name="venue[name]" placeholder="Name of the venue" required>
             </div>
+
+            <div class="field">
+                <label>Venue state</label>
+                <input type="hidden" name="country" id="countryId" value="IN" />
+
+                <select name="state" class="states order-alpha" id="stateId">
+                    <option value="">Select State</option>
+                </select>
+            </div>
+
             <div class="field">
                 <label>Venue City</label>
-                <input type="text" name="venue[city]" placeholder="City" required>
+                <select class="cities order-alpha" id="cityId" name="venue[city]">
+                    <option value="">Select City</option>
+                </select>
             </div>
         </div>
+
         <div class="field">
             <label>Venue Address</label>
             <input type="text" name="venue[address]" placeholder="Address of the venue" required>
         </div>
+
         <div class="field">
             <label>Image</label>
             <input type="text" name="venue[image]" placeholder="Image URL" required>
         </div>
+
         <div class="field">
             <label>Description</label>
             <textarea name="venue[description]" required></textarea>
         </div>
+
         <div class="two fields">
+
             <div class="field">
                 <label>Contact No.</label>
                 <input type="text" name="venue[contact]" placeholder="Contact" required>
             </div>
+
             <div class="field">
-                <label>days</label>
-                <input type="text" name="venue[days]" placeholder="days" required>
+                <label>Days</label>
+                <input type="text" name="venue[days]" placeholder="Days of the week the Open mic takes place on" required>
             </div>
         </div>
+
         <button class="ui button" type="submit">Submit</button>
     </form>
+
 </div>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//geodata.solutions/includes/statecity.js"></script>
 <% include ../partials/footer.ejs %>
